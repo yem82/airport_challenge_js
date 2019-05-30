@@ -1,6 +1,11 @@
-var Airport = function() {
+var Airport = function(capacity=50) {
   this.planes = []
-  this.capacity = 50
+  this.capacity = capacity
+};
+
+Airport.prototype.update_capacity = function(capacity){
+  this.capacity = capacity;
+  return "capacity set to " + capacity;
 };
 
 Airport.prototype.land = function(plane) {

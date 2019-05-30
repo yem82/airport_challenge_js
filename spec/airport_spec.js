@@ -3,14 +3,28 @@ describe('Airport',function(){
   var plane;
 
   beforeEach(function() {
-    airport = new Airport;
+    airport = new Airport(50);
   });
 
   describe ('initialization', function(){
 
-    it ('airport is empty', function() {
+    it ('airport has no planes', function() {
       expect(airport.planes).toEqual([]);
     });
+
+    it ('airport has a default capacity', function() {
+      expect(airport.capacity).toEqual(50)
+    });
+  });
+
+  describe ('airport capacity size can be changed', function(){
+
+    it ('able to update capacity', function(){
+      airport.update_capacity(100);
+      expect(airport.capacity).toEqual(100)
+    })
+
+  });
 
   describe ('plane landing and taking off', function() {
 
@@ -24,7 +38,6 @@ describe('Airport',function(){
         airport.land(plane);
         expect(airport.planes).toEqual([plane]);
       });
-    });
 
       it ('raises an error when airport is full', function() {
         for (i = 0; i < 50; i++) {
@@ -32,15 +45,15 @@ describe('Airport',function(){
             }
         expect(function(){ airport.land(plane); }).toThrow('Airport is full!');
       });
+    });
 
     describe ('take off', function() {
 
-      it('a plane can take off from the airport', function() {
+      it('a plane can take off from an airport', function() {
         airport.land(plane);
         airport.take_off(plane);
         expect(airport.planes).not.toContain(plane);
       });
     });
-  });
   });
 });
